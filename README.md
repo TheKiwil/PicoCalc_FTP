@@ -1,10 +1,10 @@
 # PicoCalc FTP Server
 
-A simple FTP server for Raspberry Pi Pico W integrated into a PicoCalc, allowing file transfers to and from an SD card.
+A simple FTP server for Raspberry Pi Pico 2 W integrated into a PicoCalc, allowing file transfers to and from an SD card.
 
 ## Features
 
-- **Complete FTP server** on Raspberry Pi Pico W
+- **Complete FTP server** on Raspberry Pi Pico 2 W
 - **SD card storage** for files
 - **ILI9488 display** (320x320) for status information
 - **Simple configuration** via a text file on the SD card
