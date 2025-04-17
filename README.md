@@ -48,10 +48,7 @@ A simple FTP server for Raspberry Pi Pico 2 W integrated into a PicoCalc, allowi
    cd PicoCalc_FTP
    ```
 
-2. Install PlatformIO if not already done:
-   ```bash
-   pip install -U platformio
-   ```
+2. Install PlatformIO on VSCode.
 
 3. Compile and upload the code:
    ```bash
