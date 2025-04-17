@@ -2,8 +2,6 @@
 
 A simple FTP server for Raspberry Pi Pico W integrated into a PicoCalc, allowing file transfers to and from an SD card.
 
-![PicoCalc FTP Server](https://github.com/yourusername/PicoCalc_FTP/raw/main/images/picocalc_ftp.jpg)
-
 ## Features
 
 - **Complete FTP server** on Raspberry Pi Pico W
@@ -15,10 +13,9 @@ A simple FTP server for Raspberry Pi Pico W integrated into a PicoCalc, allowing
 
 ## Hardware Requirements
 
-- Raspberry Pi Pico W or Pico 2W
-- SD card and SPI adapter
-- ILI9488 display (320x320)
-- 5V power supply
+- Raspberry Pi Pico 2W (Pico W not tested)
+- SD card
+- PicoCalc
 
 ## Connection Diagram
 
@@ -103,7 +100,7 @@ A simple FTP server for Raspberry Pi Pico W integrated into a PicoCalc, allowing
 - **WiFi connection issues**: Check the SSID and password in the configuration file
 - **FTP connection issues**: 
   - Make sure your FTP client is configured to use port 21
-  - Try active mode if passive mode doesn't work
+  - Try active mode if passive mode doesn't work (!)
 - **SD card issues**: Check that the SD card is properly formatted (FAT32) and that the configuration file is present
 
 ## Development
@@ -113,17 +110,13 @@ This project uses the following libraries:
 - [LovyanGFX](https://github.com/lovyan03/LovyanGFX) for display management
 - [SdFat](https://github.com/greiman/SdFat) for SD card management
 
-## License
-
-This project is under the MIT license. See the LICENSE file for more details.
-
 ## Contribution
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ## Author
 
-Your Name - [Your Email](mailto:your.email@example.com)
+Kiwil
 
 ## Acknowledgments
 
