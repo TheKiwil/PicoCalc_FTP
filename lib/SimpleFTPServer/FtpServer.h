@@ -567,10 +567,22 @@
 	 {
 		 _transferCallback = _transferCallbackParam;
 	 }
+
+	 // one line per command received (PASS shown as ****) and per
+	 // upload outcome, for an on-screen log
+	 void setLogCallback(void (*fn)(const char *line)) { _logCallback = fn; }
  
  private:
    void (*_callback)(FtpOperation ftpOperation, unsigned int freeSpace, unsigned int totalSpace){};
    void (*_transferCallback)(FtpTransferOperation ftpOperation, const char* name, unsigned int transferredSize){};
+   void (*_logCallback)(const char *line) = nullptr;
+   void logLine(const char *a, const char *b = "");
+   // STOR writes to storeTmp and renames it to storeFinal only when the
+   // whole file has arrived, so a failed upload leaves the old file alone
+   char storeTmp[FTP_CWD_SIZE];
+   char storeFinal[FTP_CWD_SIZE];
+   bool finishStore();
+   void discardStore();
  
    void    iniVariables();
    void    clientConnected();

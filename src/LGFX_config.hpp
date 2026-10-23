@@ -14,9 +14,37 @@
 #endif
 #define SPI_PORT  1
 
+/* LovyanGFX's ILI9488 start-up turns the display on before inversion is set
+   and the screen cleared, so the PicoCalc's panel flashes white.  This one
+   sets inversion first and leaves the display off; setup() turns it on
+   (DISPON) once the screen is black. */
+struct Panel_ILI9488_Dark : public lgfx::Panel_ILI9488
+{
+protected:
+  const uint8_t* getInitCommands(uint8_t listno) const override
+  {
+    static constexpr uint8_t list0[] =
+    {
+        CMD_PWCTR1,  2, 0x17, 0x15,
+        CMD_PWCTR2,  1, 0x41,
+        CMD_VMCTR ,  3, 0x00, 0x12, 0x80,
+        CMD_FRMCTR1, 1, 0xA0,
+        CMD_INVCTR,  1, 0x02,
+        CMD_DFUNCTR, 3, 0x02, 0x22, 0x3B,
+        CMD_ETMOD,   1, 0xC6,
+        CMD_ADJCTL3, 4, 0xA9, 0x51, 0x2C, 0x82,
+        CMD_SLPOUT , 0+CMD_INIT_DELAY, 120,
+        CMD_IDMOFF , 0,
+        CMD_INVON  , 0,
+        0xFF,0xFF,
+    };
+    return listno == 0 ? list0 : nullptr;
+  }
+};
+
 class LGFX : public lgfx::LGFX_Device
 {
-  lgfx::Panel_ILI9488 _panel_instance;
+  Panel_ILI9488_Dark _panel_instance;
   lgfx::Bus_SPI       _bus_instance; // SPIバスのインスタンス
 #ifdef USE_BACKLIGHT
   lgfx::Light_PWM     _light_instance;

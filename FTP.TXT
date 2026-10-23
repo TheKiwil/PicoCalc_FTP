@@ -1,0 +1,41 @@
+PicoCalc FTP server
+===================
+TheKiwil's PicoCalc_FTP (github.com/TheKiwil/PicoCalc_FTP),
+rebuilt to run from the boot menu. Needs a Pico 2 W.
+
+Install: copy ftp.uf2 to the card's pico2-apps folder and pick
+it from the menu.
+
+Settings: if /config_ftp.conf exists it is used:
+  ssid=MyNetwork
+  password=secret
+  ftp_user=picocalc
+  ftp_password=picocalc
+Without it, ssid, password and tz come from /settime.cfg or
+/virtualt/virtualt.cfg, and the login is picocalc / picocalc.
+
+The screen shows the address, e.g. ftp://192.168.1.50 .
+Connect with any FTP client (FileZilla, WinSCP, Windows
+Explorer). It takes one connection at a time: in FileZilla set
+Site Manager > Transfer Settings > Limit simultaneous
+connections to 1. Passive mode (the usual default) uses data
+port 50009 every time, so that's the one to allow if a firewall
+is in the way.
+
+Uploads are safe: a file arrives as NAME.~up and replaces the
+old NAME only once all of it is there. If an upload fails or is
+cancelled, the old file is left exactly as it was and the
+partial one is deleted. (APPE, append, adds to the file in place.)
+
+The screen lists each command your client sends, with the time,
+and the result of each upload in green ("saved") or red ("upload
+failed; kept ..."). Handy when a client misbehaves. Failures say
+why (425 no data connection, 426 aborted, 451, 552 card full).
+N lists the network connections in use (there is room for 5).
+
+If the WiFi drops, the screen says so and it rejoins by itself.
+
+Uploaded files get real dates when the clock is set (kept from
+settime or VirtualT, or from pool.ntp.org).
+
+Esc returns to the menu. Let transfers finish first.
